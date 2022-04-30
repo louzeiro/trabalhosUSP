@@ -1,0 +1,33 @@
+---
+title: "Material Prova 01"
+author: "Flaviane L Silva"
+date: "30/04/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Teste de hipótese
+Passo 1 = <br>
+Passo 2 = <br>
+Passo 3 = <br>
+Passo 4 = <br>
+Passo 5 = <br> 
+
+```{r}
+set.seed(13)
+mu_0 = 3
+sd <- 2
+n <-10
+x <- rnorm(n,mu_0,sd)
+x
+```
+
+## Teste T
+
+```{r}
+tteste <-t.test(x,mu=mu_0,paired = FALSE)
+tteste
+```
