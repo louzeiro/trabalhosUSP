@@ -2,4 +2,70 @@
 ## [Estatística do teste]
 ## * Dist Normal, usada quando há a média e o desvio padrão POPULACIONAL
 ## * Dist T Student, usada 
-## DIC - Delimeamento 
+
+### Exemplo da produção de café
+## mu=500 g, sigma²=400g². Em uma amostra de 16 pacotes, mu=492 g, a máquina está com problema?
+
+## Resposta:
+## Busca-se verificar se a máquina está embalando fora da média 500 g, então:
+## Passo 1: as hipóteses {H_0 : mu==mu_0, H_1: mu!=mu_0}
+## Passo 2: a estatística do teste: como foi dada a variância a estatística do teste será uma distribuição Z
+##          Z=(bar(X)-mu_0)/sqrt(sigma²/n) ~ N(0,1), na implementação
+
+## Passo 3: Região Crítica: A hipótese alternativa é bilateral, então haverá dois quantis, então com alpha = 1%,
+##                         q1 = qnorm(alpha/2) e q2 = qnrom(1-alpha/2), pois foi definida a distribuição Z como
+##                         estatística de teste.
+##                        z.obs = (bar(X)-mu)/(sigma/sqrt(n)) => bar(X) = mu+ z.obs.sigma/sqrt(n)
+rc.inf <- mu0 + q1*sigma/sqrt(n)
+rc.sup <- mu0 + q2*sigma/sqrt(n) 
+## Passo 4: Usar as informações contidas na amostra para encontrar o valor observado (v.obs) da estatística.
+n <-16
+xb <- 492
+mu0 <- 500
+sigma2 <-400
+sigma <- sqrt(sigma2)
+z.obs <- (xb-mu0)/(sigma/sqrt(n))
+valor <- pnorm(z.obs, lower.tail=T)
+data.frame(zobs = round(z.obs,4)
+          valorP = round(2*valor,4)
+          
+## PAsso 5: Conclusão: Sob a hipótese nula verdadeira, é muito provavel obter um valor tão extremo quando o 
+##          o valor observado para a estátistica Z=z.obs. Assim, não existem evidências para rejeitar H_0 com 
+##          o nível de significância alpha = 1%. Logo, não é necessário interromper o empacotamento.
+
+## Poder = 1 - beta(erro tipo II)
+
+beta <- NULL
+mu <- sort(c(498,495,492,490,487,485,480,475,500,502,505,508,510,513,515,520,525)
+for (i in  1:length(mu))
+  beta[i] <- pnorm(rc.sup,mu[i], sigma/sqrt...faltando
+ 
+ poder <- round(1-beta,4)
+ data.frame(mu=mu, beta = round(beta,4), poder = poder)
+ 
+ ## visualizando
+ plot(mu, poder, pch=19, col = "blue")
+ lines(mu, poder, col = "Blue")
+ 
+ ###############################################
+ ########## Experimenetação    #################
+ ###############################################
+ ## Princípios básicos:* Repetição, necessário para gerar variabilidade aos dados
+ ##                    * Causalização, necessário para não enviesar o estudo
+ ##                    * Controle Local, não necessário em estudo onde a área é homogenea
+ 
+ #### DIC, Delineamento Inteiramente Causalizado
+ 
+ ### Delineamento experimental
+ 
+ 
+ 
+ #### Exemplo dos circutos
+ y <- c(19,20,19,30,8,  
+        80,61,73,56,80,
+        47,26,25,35,50,
+        95,46,83,78,97
+        )
+trat <- c(rep(1,5), rep(2,5),rep(3,5),rep(4,5))
+trat <- as.factor(trat)  #tratamento
+dad <-data.frame(trat,y)  
